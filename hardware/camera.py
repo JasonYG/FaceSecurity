@@ -2,6 +2,7 @@ import config as keys
 
 from picamera import PiCamera
 from time import sleep
+import base64
 import requests
 
 import boto3
@@ -45,10 +46,11 @@ def search_faces_by_image(bytes, collection_id, threshold=80):
 print("capturing...")
 camera.capture('/home/pi/Desktop/image.jpg')
 print("retrieving file...")
-files = {'file': open('/home/pi/Desktop/image.jpg', 'rb')}
+with open("/home/pi/Desktop/image.jpg", "rb") as image_file:
+    encoded_string = base64.b64encode(image_file.read())
 print("searching in collection...")
 
-for record in search_faces_by_image(files, COLLECTION):
+for record in search_faces_by_image(encoded_string, COLLECTION):
 	face = record['Face']
 	print "Matched Face ({}%)".format(record['Similarity'])
 	print "  FaceId : {}".format(face['FaceId'])
