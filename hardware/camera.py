@@ -46,15 +46,15 @@ def search_faces_by_image(bytes, collection_id, threshold=80):
 print("capturing...")
 camera.capture('/home/pi/Desktop/image.jpg')
 print("retrieving file...")
-with open("/home/pi/Desktop/image.jpg", "rb") as image_file:
-    encoded_string = base64.b64encode(image_file.read())
+source_bytes = open('/home/pi/Desktop/image.jpg', 'rb')
 print("searching in collection...")
 
-for record in search_faces_by_image(encoded_string, COLLECTION):
+for record in search_faces_by_image(source_bytes.read(), COLLECTION):
 	face = record['Face']
 	print "Matched Face ({}%)".format(record['Similarity'])
 	print "  FaceId : {}".format(face['FaceId'])
 	print "  ImageId : {}".format(face['ExternalImageId'])
+source_bytes.close()
 #r = requests.post('https://2adc0fc4.ngrok.io/upload/1', files=files)
 #r.text
 sleep(1)
