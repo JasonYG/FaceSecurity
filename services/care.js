@@ -17,9 +17,8 @@ const Response = require("./response"),
   i18n = require("../i18n.config");
 
 module.exports = class Care {
-  constructor(user,url, webhookEvent) {
+  constructor(user, webhookEvent) {
     this.user = user;
-    this.url = url;
     this.webhookEvent = webhookEvent;
   }
 
@@ -30,14 +29,9 @@ module.exports = class Care {
       case "CARE_HELP":
         response = Response.genQuickReply(
           i18n.__("care.prompt", {
-            userFirstName: this.user.firstName,
-            userImage: this.user.url
+            userFirstName: this.user.firstName
           }),
           [
-            {
-              userImage: i18n.__("care.order"),
-              payloud: "CARE_ORDER"
-            }
             /*
             {
               title: i18n.__("care.order"),
