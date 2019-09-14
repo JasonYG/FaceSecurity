@@ -7,8 +7,8 @@ const graphApi = require("./graph-api/main");
 
 app.get("/", (req, res) => res.send({ msg: "the server is working" }));
 
-app.post("/detect-img", (req, res) => {
-  res(graphApi());
-});
+// app.post("/detect-img", (req, res) => {
+//   res(graphApi());
+// });
 
 app.listen(port, () => console.log(`Listening to port ${port}!`));
