@@ -1,9 +1,12 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 const graphApi = require("./graph-api/main");
+
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => res.send({ msg: "the server is working" }));
 
