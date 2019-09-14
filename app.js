@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => res.send({ msg: "the server is working" }));
 
-app.post("callback", (req, res) => {
+app.post("/callback", (req, res) => {
   console.log(req.body);
 });
 
