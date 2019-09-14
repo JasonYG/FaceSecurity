@@ -36,7 +36,7 @@ module.exports = class Care {
             {
               title: i18n.__("care.order"),
               payload: "CARE_ORDER"
-            },
+            },*/
             {
               title: i18n.__("care.billing"),
               payload: "CARE_BILLING"
@@ -45,7 +45,7 @@ module.exports = class Care {
               title: i18n.__("care.other"),
               payload: "CARE_OTHER"
             }
-            */
+            
           ]
         );
         break;

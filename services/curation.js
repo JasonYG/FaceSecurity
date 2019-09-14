@@ -74,11 +74,11 @@ module.exports = class Curation {
           /*{
             title: i18n.__("curation.me"),
             payload: "CURATION_FOR_ME"
-          },
+          },*/
           {
             title: i18n.__("curation.someone"),
             payload: "CURATION_SOMEONE_ELSE"
-          }*/
+          }
         ]);
         break;
 
