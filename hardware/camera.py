@@ -56,13 +56,14 @@ print("searching in collection...")
 searchResult = 0
 
 for record in search_faces_by_image(source_bytes.read(), COLLECTION):
+    searchResult = 1
     face = record['Face']
 	print "Matched Face ({}%)".format(record['Similarity'])
 	print "  FaceId : {}".format(face['FaceId'])
 	print "  ImageId : {}".format(face['ExternalImageId'])
 source_bytes.close()
 
-if(searchResult = 0):
+if(searchResult == 0):
     print "Not recognized"
 
 #r = requests.post('https://2adc0fc4.ngrok.io/upload/1', files=files)
