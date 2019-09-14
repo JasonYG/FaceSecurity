@@ -5,6 +5,6 @@ TODO
 ## Contributors
 
 Brandon Goh - [@gohbig](https://github.com/gohbig)  
-Brian
+Brian  
 Jason Guo - @JasonYG  
 Jonathan Xu
