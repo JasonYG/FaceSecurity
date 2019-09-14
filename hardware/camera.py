@@ -5,7 +5,7 @@ from time import sleep
 import requests
 
 import boto3
-from facebook import Facebook
+import facebook
 
 camera = PiCamera()
 camera.start_preview()
