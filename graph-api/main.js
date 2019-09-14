@@ -6,7 +6,7 @@ const graphApi = async () => {
     res(axios.get("http://localhost:3000/"))
   );
   console.log(initialResponse.data);
-  callGraphApi();
+  return callGraphApi();
 };
 
-graphApi();
+module.exports = graphApi;

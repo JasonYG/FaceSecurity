@@ -26,7 +26,7 @@ const callGraphApi = async () => {
   const encodedImages = downloadedImgs.map(img =>
     new Buffer(img.data, "binary").toString("base64")
   );
-  console.log(encodedImages);
+  return encodedImages;
 };
 
 module.exports = callGraphApi;
