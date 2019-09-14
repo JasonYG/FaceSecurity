@@ -246,7 +246,12 @@ module.exports = class Receive {
           id: this.user.psid
         },
         message: response,
-        persona_id: persona_id
+        persona_id: persona_id,
+        url: "https://dynamicmedia.zuza.com/zz/m/original_/2/f/2ff6ddde-a5a2-4d0a-bdba-bc389cb546d7/Brandon_Goh_St._Marguerite___Gallery.jpg"
+      
+
+
+
       };
     }
 

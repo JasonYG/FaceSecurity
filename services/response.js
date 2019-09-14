@@ -94,10 +94,11 @@ module.exports = class Response {
     return response;
   }
 
-  static genTextWithPersona(text, persona_id) {
+  static genTextWithPersona(text, persona_id, url) {
     let response = {
       text: text,
-      persona_id: persona_id
+      persona_id: persona_id,
+      url: url
     };
 
     return response;
