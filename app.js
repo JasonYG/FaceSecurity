@@ -8,7 +8,7 @@ const graphApi = require("./graph-api/main");
 app.get("/", (req, res) => res.send({ msg: "the server is working" }));
 
 app.post("/detect-img", (req, res) => {
-  res.send(graphApi());
+  res.send({ encodedImages: graphApi() });
 });
 
 app.listen(port, () => console.log(`Listening to port ${port}!`));
