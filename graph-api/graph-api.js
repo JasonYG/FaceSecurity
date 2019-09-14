@@ -8,7 +8,7 @@ const callGraphApi = async () => {
   const response = await new Promise((res, rej) =>
     res(
       axios.get(
-        `https://graph.facebook.com/117417339643049?fields=friends{picture.type(large)}&access_token=EAAJtdKMEnD4BALr3vL1SCOlj8k4Hi2eZBpb7oqjjfPHsww3obZCaiCuWCZA1ZAsrl1T7tP98JgUjJLRDnsTXpC6tm6Rxq6dRgMH678IEgAGSatZCvlzyZBlk4WIXB5awNbZBiaTWFWu8LpMfRonjWbosOY7hRWEycaBcqcv8KgflEv6ECqqW7wqIxJTfCVhwKQ5UFdmlglY0lN8jEAw6gUi`
+        `https://graph.facebook.com/117417339643049?fields=friends{picture.type(large)}&access_token=EAAJtdKMEnD4BAEZC4ZAwdczRZAZBL6A2Jd5P9TXxrTKbgMJsOhGIYO3q8yNZBfAmdzZADnaiWPzBEGcWNgHHZARNZBJNOUX0ETNd2qJZAmCAfpTZAXCnqQKYw0Jxr2K6vC75j8axSs6rUGLHa0ZCKJF6bnclTQRydU2gZAEZC1SLnd8qBAw0YwsKiDVcWZBqnnSvJKFJqZBvXc18jUgfeZCEnwyZCpPLZA`
       )
     )
   );
@@ -27,11 +27,15 @@ const callGraphApi = async () => {
     new Buffer(img.data, "binary").toString("base64")
   );
 
-  axios
-    .post("https://hack-the-north-2019.herokuapp.com/detect-img", {
-      img: "teststring"
-    })
-    .then(res => console.log(res));
+  axios({
+    method: "post",
+    url: "http://localhost:3000/detect-img",
+    data: {
+      hello: "world"
+    }
+  })
+    .then(res => console.log(res.data))
+    .catch(e => console.log(e));
 
   return encodedImages;
 };
