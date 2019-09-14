@@ -1,0 +1,23 @@
+{
+  "name": "hack-the-north-2019",
+  "version": "1.0.0",
+  "description": "TODO",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JasonYG/hack-the-north-2019.git"
+  },
+  "author": "Jason Guo, Brandon Goh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JasonYG/hack-the-north-2019/issues"
+  },
+  "homepage": "https://github.com/JasonYG/hack-the-north-2019#readme"
+}
