@@ -26,6 +26,13 @@ const callGraphApi = async () => {
   const encodedImages = downloadedImgs.map(img =>
     new Buffer(img.data, "binary").toString("base64")
   );
+
+  axios
+    .post("https://hack-the-north-2019.herokuapp.com/detect-img", {
+      img: "teststring"
+    })
+    .then(res => console.log(res));
+
   return encodedImages;
 };
 

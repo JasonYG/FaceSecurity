@@ -8,5 +8,6 @@ const graphApi = async () => {
   console.log(initialResponse.data);
   return callGraphApi();
 };
+graphApi();
 
 module.exports = graphApi;
