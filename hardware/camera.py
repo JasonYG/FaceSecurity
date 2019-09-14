@@ -48,13 +48,23 @@ camera.capture('/home/pi/Desktop/image.jpg')
 print("retrieving file...")
 source_bytes = open('/home/pi/Desktop/image.jpg', 'rb')
 print("searching in collection...")
+#add all the friends to the indexing collection and add their nme as img id
+#if you send a messenger thing that has their name it adds them to trusted
+
+#index_faces(source_bytes.read(), COLLECTION, "NAME FROM FACEBOOK")
+
+searchResult = 0
 
 for record in search_faces_by_image(source_bytes.read(), COLLECTION):
-	face = record['Face']
+    face = record['Face']
 	print "Matched Face ({}%)".format(record['Similarity'])
 	print "  FaceId : {}".format(face['FaceId'])
 	print "  ImageId : {}".format(face['ExternalImageId'])
 source_bytes.close()
+
+if(searchResult = 0):
+    print "Not recognized"
+
 #r = requests.post('https://2adc0fc4.ngrok.io/upload/1', files=files)
 #r.text
 sleep(1)
