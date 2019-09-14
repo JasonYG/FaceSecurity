@@ -5,7 +5,7 @@
 	"menu": {
 		"support": "Customer Support",
 		"order": "Order updates",
-		"help": "Get the fuck away",
+		"help": "Keep them out",
 		"suggestion": "Let them in",
 		"shop": "Shop now",
 		"start_over": "Start over"
@@ -23,7 +23,7 @@
 		"coupon": "Added your coupon to this thread, you can now check out the discounted summer collection"
 	},
 	"curation": {
-		"prompt": "Are you looking for an outfit for yourself or someone else?",
+		"prompt": "{{userFirstName}} has been let in",
 		"occasion": "Great! Let's get started. First, is there an occasion in mind?",
 		"price": "How much are you looking to spend?",
 		"me": "For me!",
@@ -47,7 +47,7 @@
 		"status": "Your order is on it’s way, expect to have it in 3 days."
 	},
 	"care": {
-		"prompt": "To connect you with the right team please let me know what this is about?",
+		"prompt": "{{userFirstName}} will stay out",
 		"order": "Order Inquiries",
 		"billing": "Billing Issues",
 		"other": "Other",

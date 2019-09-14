@@ -32,6 +32,7 @@ module.exports = class Care {
             userFirstName: this.user.firstName
           }),
           [
+            /*
             {
               title: i18n.__("care.order"),
               payload: "CARE_ORDER"
@@ -44,6 +45,7 @@ module.exports = class Care {
               title: i18n.__("care.other"),
               payload: "CARE_OTHER"
             }
+            */
           ]
         );
         break;
