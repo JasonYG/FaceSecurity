@@ -102,7 +102,7 @@ module.exports = class Receive {
         ),
         Response.genText(
           i18n.__("get_started.guidance", {
-            strangerName: "noboyDy"
+            strangerName: "noboyy"
           })
         ),
         Response.genQuickReply(i18n.__("get_started.help"), [
