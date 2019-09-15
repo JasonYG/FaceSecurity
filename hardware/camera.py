@@ -6,11 +6,12 @@ import base64
 import requests
 
 import boto3
+from botocore.exceptions import ClientError
 import facebook
 
 camera = PiCamera()
 camera.start_preview()
-
+trsutedPeople = []
 COLLECTION = "htn2019collection"
 
 rekognition = boto3.client(
@@ -53,21 +54,30 @@ print("searching in collection...")
 
 #index_faces(source_bytes.read(), COLLECTION, "NAME FROM FACEBOOK")
 
-searchResult = 0
+searchResult = 2
+try:
+    for record in search_faces_by_image(source_bytes.read(), COLLECTION):
+        searchResult = 1
+        face = record['Face']
+        print "Matched Face ({}%)".format(record['Similarity'])
+        print "  FaceId : {}".format(face['FaceId'])
+        print "  ImageId : {}".format(face['ExternalImageId'])
+        imageId = face['ExternalImageId']
+except ClientError as e:
+        searchResult = 0
+        print("Unexpected error: %s" % e)
+        print "no one at door"
 
-for record in search_faces_by_image(source_bytes.read(), COLLECTION):
-    searchResult = 1
-    face = record['Face']
-	print "Matched Face ({}%)".format(record['Similarity'])
-	print "  FaceId : {}".format(face['FaceId'])
-	print "  ImageId : {}".format(face['ExternalImageId'])
 source_bytes.close()
 
-if(searchResult == 0):
-    print "Not recognized"
-
-#r = requests.post('https://2adc0fc4.ngrok.io/upload/1', files=files)
-#r.text
+'''
+if(searchResult == 1 && imageId in trustedPeople):
+    print "Let them in"
+elif(searchResult == 1):
+    print "Untrusted friend"
+elif(searchResult == 0):
+    print "unknown person"
+'''
 sleep(1)
 
 
