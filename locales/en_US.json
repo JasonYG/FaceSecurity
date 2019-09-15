@@ -12,7 +12,7 @@
   },
   "get_started": {
     "welcome": "Hi {{userFirstName}}! This is Door Protecting Services. {{strangerName}} is at your door.",
-    "guidance": "",
+    "guidance": "The door is currently locked.",
     "help": "Would you like to let them in?"
   },
   "leadgen": {
