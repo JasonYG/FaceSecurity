@@ -1,7 +1,7 @@
 const doorNames = {
   strangerName: "stranger",
   updateName: function(name) {
-    doorNames.strangerName = name;
+    doorNames.strangerName = name.replace("_", " ");
   }
 };
 
