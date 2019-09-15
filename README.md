@@ -1,144 +1,32 @@
-# Original Coast Clothing Messenger Bot
+# FaceSecurity - Hack the North 2019
 
-Original Coast Clothing (OC) is a fictional clothing brand created to showcase key features of the Messenger Platform. OC leverages key features to deliver a great customer experience. Using this demo as inspiration, you can create a delightful messaging experience that leverages both automation and live customer support. We are also providing the open source code of the app and a guide to deploy the experience on your local environment or remote server.
+Inspiration
+---
 
-[Access the Messenger experience](https://m.me/OriginalCoastClothing?ref=GITHUB)
+Ever been stuck in a meeting, test, or don't have cell service? Want to ensure that your kids are safe, not leaving the house, or not letting anyone in? Has your friend ever forgot anything at your house and asked to get it while you are out? FaceSecurity solves all these problems.
 
-![Messenger Experience](public/experience.png)
+What it does
+---
+FaceSecurity uses your social interaction on Facebook and Messenger to see who your friends are, and categorizes their permissions to access your dorm, apartment, or house with one simple message on Messenger. It can also pick times where certain people can come in, tell you which one of your friends from Facebook is at the door, or if its a random stranger.
 
-See the [Developer Documentations on this experience](https://developers.facebook.com/docs/messenger-platform/getting-started/sample-apps/original-coast-clothing).
+How we built it
+---
+We used a Raspberry Pi + PiCamera to run a python script that uses the Graph API to grab images and names of your Facebook friends. It then builds a collection of user entries and uploads them to the AWS Recognition platform. Whenever someone comes to your door the lock queries the collection to identify if if the visitor is one of your close friends, distant friends, or a stranger on Facebook. A Node.js script runs on Heroku to handle the messenger calls to tell you who is at the door, and to grant them access or not. A servo control the doors lock and only activates it if the friend is in a special "allowed in" category.
 
-# Setting up your Messenger App
+Challenges we ran into
+---
+We first tried to run a python script that sends the image of the person at the door to a JS server that would then query the AWS ML, however sending the image was a large issue so we changed to handle all of that on the Rpi.
 
-## Requirements
+Accomplishments that we're proud of
+---
+We're proud of being able to merge hardware, software and 3D printing to create a product with an intuitive use case.
 
-- **Facebook Page:** Will be used as the identity of your messaging experience. When people chat with your page. To create a new Page, visit https://www.facebook.com/pages/create.
-- **Facebook Developer Account:** Required to create new apps, which are the core of any Facebook integration. You can create a new developer account by going to the [Facebook Developers website](https://developers.facebook.com/) and clicking the "Get Started" button.
-- **Facebook App:** Contains the settings for your Messenger automation, including access tokens. To create a new app, visit your [app dashboard](https://developers.facebook.com/apps).
+What's next for FaceSecurity
+---
+Initiate face calls when strangers are at the door, and better friend permission management.
 
-## Setup Steps
+Technologies
+---
+The Raspberry Pi was programmed using Python. The back-end server was created using Node.js, Express.js, Socket.io. We used Amazon Web Services for face recognition, Facebook Graph API for connecting the homeowner with friends, and the Facebook Messenger API for the chat bot.
 
-Before you begin, make sure you have completed all of the requirements listed above. At this point you should have a Page and a registered Facebook App.
-
-#### Get the App id and App Secret
-
-1. Go to your app Basic Settings, [Find your app here](https://developers.facebook.com/apps)
-2. Save the **App ID** number and the **App Secret**
-
-#### Grant  Messenger access to your Facebook App
-
-1. Go to your app Dashboard
-2. Under Add Product find Messenger and click Set Up
-3. Now you should be in the App Messenger Settings
-4. Under Access Tokens, click on Edit Permissions
-5. Select the desired page and allow Manage and access Page conversations in Messenger
-6. Select the desired page and an access token should appear
-7. Get the Page ID from the page access token by using the [Access Token Debugger](https://developers.facebook.com/tools/debug/accesstoken/)
-8. In the section Built-In NLP, select your page and enable the toggle
-
-# Installation
-
-Clone this repository on your local machine:
-
-```bash
-$ git clone git@github.com:fbsamples/original-coast-clothing.git
-$ cd original-coast-clothing
-```
-
-You will need:
-
-- [Node](https://nodejs.org/en/) 10.x or higher
-- [Localtunnel](https://github.com/localtunnel/localtunnel) or remote server like [Heroku](https://www.heroku.com/)
-
-# Usage
-
-## Using Local Tunnel
-
-#### 1. Install the dependencies
-
-```bash
-$ npm install
-```
-
-Alternatively, you can use [Yarn](https://yarnpkg.com/en/):
-
-```bash
-$ yarn install
-```
-
-#### 2. Install Local Tunnel
-```bash
-npm install -g localtunnel
-```
-
-Open a new terminal tab and request a tunnel to your local server with your preferred port
-```bash
-lt --port 3000
-```
-
-#### 3. Rename the file `.sample.env` to `.env`
-
-```bash
-mv .sample.env .env
-```
-
- Edit the `.env` file to add all the values for your app and page. Then run your app locally using the built-in web server
-
-#### 4. Run your app locally using the built-in web server<
-
-```bash
-node app.js
-```
-
-You should now be able to access the application in your browser at [http://localhost:3000](http://localhost:3000)
-
-#### 5. Configure your webhook subcription and set the Messenger profile
-
-Use the `VERIFY_TOKEN` that you created in `.env` file and call the **/profile** endpoint like so:
-```
-http://localhost:3000/profile?mode=all&verify_token=verify-token
-```
-
-#### 6. Test that your app setup is successful
-
-Send a message to your Page from Facebook or in Messenger, if your webhook receives an event, you have fully set up your app! Voilà!
-
-## Using Heroku
-#### 1. Install the Heroku CLI
-
-Download and install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
-
-#### 2. Create an app from the CLI
-
-```bash
-git init
-heroku apps:create
-# Creating app... done, ⬢ mystic-wind-83
-# Created http://mystic-wind-83.herokuapp.com/ | git@heroku.com:mystic-wind-83.git
-```
-
-#### 3. Deploy the code
-```bash
-git add .
-git commit -m "My first commit"
-git push heroku master
-```
-
-#### 4. Set your environment variables
-  In your Heroku App Dashboard [https://dashboard.heroku.com/apps/mystic-wind-83](https://dashboard.heroku.com/apps/mystic-wind-83) set up the config vars following the comments in the file ```.sample.env```
-
-#### 5. Configure your webhook subscription and set the Messenger profile
-  You should now be able to access the application. Use the ```VERIFY_TOKEN``` that you created as config vars and call the **/profile** endpoint like so:
-
-  ```
-  http://mystic-wind-83.herokuapp.com/profile?mode=all&verify_token=verify-token
-  ```
-
-#### 6. Test that your app setup is successful
-
-  Send a message to your Page from Facebook or in Messenger, if your webhook receives an event, you have fully set up your app! Voilà!
-
-## License
-Sample Messenger App Original Coast Clothing is BSD licensed, as found in the LICENSE file.
-
-See the [CONTRIBUTING](CONTRIBUTING.md) file for how to help out.
+The chatbot example on the Facebook API documentation was modified to complete the project. The example can be found [here](https://github.com/fbsamples/original-coast-clothings)
