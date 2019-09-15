@@ -69,38 +69,6 @@ source_bytes.close()
 if(searchResult >= 1):
     print "Friend detected"
     requests.post("https://still-escarpment-52187.herokuapp.com/webhook", data = {"name": imageId, "hardcode":"true"})
-    '''
-    {
-    "object": "page",
-    entry: [
-      {
-        "id": "112881793431692",
-        "time: 1568531417023,
-        messaging: [
-          {
-            sender: { "id": "1987372491362605" },
-            recipient: { "id": "112881793431692" },
-            timestamp: 1568531416669,
-            message: {
-              mid:
-                "TAtOcXnHZd2b4zKfjhqHx5UwxtjD9Ze9a88n_n3puHkFxtSc_CJEzes3t42DF4cEA_9R--w4-MGJeHz_bJu2RA",
-              text: "Hi",
-              nlp: {
-                entities: {
-                  sentiment: [
-                    { confidence: 0.82321096011147, value: "neutral" }
-                  ],
-                  bye: [{ confidence: 0.65917515687724, value: "true" }]
-                },
-                detected_locales: [{ locale: "en_XX", confidence: 0.6659 }]
-              }
-            }
-          }
-        ]
-      }
-    ]
-  })
-  '''
 
 # Get request for lock
 allowedIn = ""
@@ -108,9 +76,11 @@ allowedIn= requests.get("http://still-escarpment-52187.herokuapp.com/open").cont
 print allowedIn
 if 'true' in allowedIn:
     print "cpock"
-    pwm.ChangeDutyCycle(5)
+    pwm.ChangeDutyCycle(7.5)
+    
 else:
-    pwm.ChangeDutyCycle(10)
+    pwm.ChangeDutyCycle(2.5)
+    
     
 #pwm.stop()
-sleep(2) # delays 2 seconds
+sleep(1) # delays 2 seconds
