@@ -206,20 +206,25 @@ module.exports = class Receive {
             strangerName: doorNames.strangerName
           })
         ),
-        Response.genQuickReply(i18n.__("get_started.help"), [
-          {
-            title: i18n.__("care.order"),
-            payload: "CARE_ORDER"
-          },
-          {
-            title: i18n.__("care.billing"),
-            payload: "CARE_BILLING"
-          },
-          {
-            title: i18n.__("care.other"),
-            payload: "CARE_OTHER"
-          }
-        ])
+        Response.genQuickReply(
+          i18n.__("get_started.help", {
+            userFirstName: doorNames.strangerName
+          }),
+          [
+            {
+              title: i18n.__("care.order"),
+              payload: "CARE_ORDER"
+            },
+            {
+              title: i18n.__("care.billing"),
+              payload: "CARE_BILLING"
+            },
+            {
+              title: i18n.__("care.other"),
+              payload: "CARE_OTHER"
+            }
+          ]
+        )
       ];
     } else {
       response = {
