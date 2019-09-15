@@ -117,7 +117,7 @@ app.post("/webhook", (req, res) => {
   ) {
     const text = req.body.entry[0].messaging[0].message.text;
     if (text.includes("Add")) {
-      doorNames.addAcceptedUser(`${text.split(" ")[1]}  ${text.split(" ")[2]}`);
+      doorNames.addAcceptedUser(`${text.split(" ")[1]} ${text.split(" ")[2]}`);
       console.log(doorNames.acceptedUsers);
     }
   }
