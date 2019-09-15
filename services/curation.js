@@ -71,14 +71,14 @@ module.exports = class Curation {
 
       case "CURATION":
         response = Response.genQuickReply(i18n.__("curation.prompt"), [
-          /*{
+          {
             title: i18n.__("curation.me"),
             payload: "CURATION_FOR_ME"
-          },*/
-          // {
-          //   title: i18n.__("curation.someone"),
-          //   payload: "CURATION_SOMEONE_ELSE"
-          // }
+          },
+          {
+            title: i18n.__("curation.someone"),
+            payload: "CURATION_SOMEONE_ELSE"
+          }
         ]);
         // Add person to trusted friends list
         break;

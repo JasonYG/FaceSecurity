@@ -23,7 +23,7 @@
     "coupon": "Added your coupon to this thread, you can now check out the discounted summer collection"
   },
   "curation": {
-    "prompt": "{{userFirstName}} has been let in",
+    "prompt": "They have been let in",
     "occasion": "Great! Let's get started. First, is there an occasion in mind?",
     "price": "How much are you looking to spend?",
     "me": "For me!",
