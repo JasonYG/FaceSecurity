@@ -10,7 +10,8 @@
 
 "use strict";
 
-const i18n = require("../i18n.config");
+const i18n = require("../i18n.config"),
+  doorNames = require("./doorNames").doorNames;
 
 module.exports = class Response {
   static genQuickReply(text, quickReplies) {
@@ -128,7 +129,8 @@ module.exports = class Response {
   static genNuxMessage(user) {
     let welcome = this.genText(
       i18n.__("get_started.welcome", {
-        userFirstName: user.firstName
+        userFirstName: user.firstName,
+        strangerName: doorNames.strangerName
       })
     );
 

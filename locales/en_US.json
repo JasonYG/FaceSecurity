@@ -11,9 +11,9 @@
     "start_over": "Start over"
   },
   "get_started": {
-    "welcome": "Hi {{userFirstName}}! This is Door Protecting Serivces",
-    "guidance": "Someone is at your door",
-    "help": "Would you like to let {{userFirstName}} them in?"
+    "welcome": "Hi {{userFirstName}}! This is Door Protecting Services. {{strangerName}} is at your door.",
+    "guidance": "",
+    "help": "Would you like to let them in?"
   },
   "leadgen": {
     "promo": "Hi {{userFirstName}}, finding great outfits is now easier and more convenient.",
