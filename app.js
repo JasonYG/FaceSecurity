@@ -148,7 +148,10 @@ exports.strangerName = strangerName;
 // Sends whether the door is open or not
 app.get("/open", (req, res) => {
   console.log("opened door");
-  res.send({ open: "false" });
+  const { acceptedUsers } = doorNames;
+  res.send({
+    open: acceptedUsers.includes(doorNames.strangerName) ? "true" : "false"
+  });
 });
 
 // Set up your App's Messenger Profile
