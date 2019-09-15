@@ -9,9 +9,16 @@ import boto3
 from botocore.exceptions import ClientError
 import facebook
 
+import RPi.GPIO as GPIO
+
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(12, GPIO.OUT)
+pwm = GPIO.PWM(12, 100)
+
+
 camera = PiCamera()
-camera.start_preview()
-trsutedPeople = []
+trustedPeople = ["Brian_Machado"]
 COLLECTION = "htn2019collection"
 
 rekognition = boto3.client(
@@ -22,17 +29,6 @@ rekognition = boto3.client(
 )
 
 # Rekognition functions
-def index_faces(bytes, collection_id, image_id=None, attributes=()):
-	response = rekognition.index_faces(
-		Image={
-			"Bytes": bytes
-		},
-		CollectionId=collection_id,
-		ExternalImageId=image_id,
-	    DetectionAttributes=attributes,
-	)
-	return response['FaceRecords']
-
 def search_faces_by_image(bytes, collection_id, threshold=80):
 	response = rekognition.search_faces_by_image(
 		Image={
@@ -70,15 +66,16 @@ except ClientError as e:
 
 source_bytes.close()
 
-'''
-if(searchResult == 1 && imageId in trustedPeople):
+
+if(searchResult == 1 and imageId in trustedPeople):
     print "Let them in"
+    #pwm.start(50)
+    time.sleep(1)
 elif(searchResult == 1):
     print "Untrusted friend"
 elif(searchResult == 0):
     print "unknown person"
-'''
+
 sleep(1)
 
 
-camera.stop_preview()
