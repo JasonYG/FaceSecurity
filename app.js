@@ -142,6 +142,7 @@ let strangerName = "stranger";
 app.post("/doorbell", (req, res) => {
   const { name } = req.body;
   doorNames.updateName(name);
+  res.send({ status: "added name" });
 });
 exports.strangerName = strangerName;
 
