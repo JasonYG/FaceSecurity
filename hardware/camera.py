@@ -21,17 +21,6 @@ rekognition = boto3.client(
 )
 
 # Rekognition functions
-def index_faces(bytes, collection_id, image_id=None, attributes=()):
-	response = rekognition.index_faces(
-		Image={
-			"Bytes": bytes
-		},
-		CollectionId=collection_id,
-		ExternalImageId=image_id,
-	    DetectionAttributes=attributes,
-	)
-	return response['FaceRecords']
-
 def search_faces_by_image(bytes, collection_id, threshold=80):
 	response = rekognition.search_faces_by_image(
 		Image={
@@ -50,9 +39,6 @@ source_bytes = open('/home/pi/Desktop/image.jpg', 'rb')
 print("searching in collection...")
 #add all the friends to the indexing collection and add their nme as img id
 #if you send a messenger thing that has their name it adds them to trusted
-
-#index_faces(source_bytes.read(), COLLECTION, "NAME FROM FACEBOOK")
-
 searchResult = 0
 
 for record in search_faces_by_image(source_bytes.read(), COLLECTION):

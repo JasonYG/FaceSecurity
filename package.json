@@ -4,7 +4,12 @@
   "description": "TODO",
   "main": "app.js",
   "dependencies": {
+<<<<<<< HEAD
     "aws-sdk": "^2.528.0",
+=======
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+>>>>>>> 6d4516ee364d65994c5be3f59a76f68d6467a530
     "express": "^4.17.1"
   },
   "devDependencies": {
@@ -12,7 +17,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "build": "cd graph-api; npm install; cd ..; cd aws-api; npm install; cd ..",
+    "heroku-postbuild": "cd graph-api; npm install; cd ..; cd aws-api; npm install; cd ..",
+    "start": "cd graph-api; npm install; cd ..; cd aws-api; npm install; cd ..; node app.js"
   },
   "repository": {
     "type": "git",
