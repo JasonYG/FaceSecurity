@@ -10,14 +10,14 @@ from botocore.exceptions import ClientError
 import facebook
 
 import RPi.GPIO as GPIO
-
+camera = PiCamera()
+GPIO.setwarnings(False)
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(12, GPIO.OUT)
 pwm = GPIO.PWM(12, 100)
 
 
-camera = PiCamera()
 trustedPeople = ["Brian_Machado"]
 COLLECTION = "htn2019collection"
 
@@ -69,8 +69,8 @@ source_bytes.close()
 
 if(searchResult == 1 and imageId in trustedPeople):
     print "Let them in"
-    #pwm.start(50)
-    time.sleep(1)
+    pwm.start(50)
+    sleep(1)
 elif(searchResult == 1):
     print "Untrusted friend"
 elif(searchResult == 0):
