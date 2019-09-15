@@ -47,7 +47,7 @@
     "status": "Your order is on it’s way, expect to have it in 3 days."
   },
   "care": {
-    "prompt": "{{userFirstName}} will stay out",
+    "prompt": "{{userFirstName}} will stay out.",
     "order": "Order Inquiries",
     "billing": "Billing Issues",
     "other": "Other",
