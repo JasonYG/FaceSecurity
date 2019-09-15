@@ -20,6 +20,7 @@ const express = require("express"),
   User = require("./services/user"),
   config = require("./services/config"),
   i18n = require("./i18n.config"),
+  doorNames = require("./services/doorNames").doorNames,
   app = express();
 
 var users = {};
@@ -140,7 +141,7 @@ app.post("/webhook", (req, res) => {
 let strangerName = "stranger";
 app.post("/doorbell", (req, res) => {
   const { name } = req.body;
-  strangerName = name;
+  doorNames.updateName(name);
 });
 exports.strangerName = strangerName;
 

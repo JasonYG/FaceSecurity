@@ -16,7 +16,8 @@ const Curation = require("./curation"),
   Care = require("./care"),
   Survey = require("./survey"),
   GraphAPi = require("./graph-api"),
-  i18n = require("../i18n.config");
+  i18n = require("../i18n.config"),
+  doorNames = require("./doorNames").doorNames;
 
 module.exports = class Receive {
   constructor(user, webhookEvent) {
@@ -202,7 +203,7 @@ module.exports = class Receive {
         Response.genText(i18n.__("chat_plugin.prompt")),
         Response.genText(
           i18n.__("get_started.guidance", {
-            strangerName: "noboyDy"
+            strangerName: doorNames.strangerName
           })
         ),
         Response.genQuickReply(i18n.__("get_started.help"), [

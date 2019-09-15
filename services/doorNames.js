@@ -1,9 +1,8 @@
 const doorNames = {
   strangerName: "stranger",
-  updateName: name => {
-    strangerName = name;
+  updateName: function(name) {
+    doorNames.strangerName = name;
   }
 };
-console.log(`stranger name is ${strangerName}`);
 
 exports.doorNames = doorNames;
