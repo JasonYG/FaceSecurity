@@ -13,7 +13,8 @@
 // Imports dependencies
 const Response = require("./response"),
   config = require("./config"),
-  i18n = require("../i18n.config");
+  i18n = require("../i18n.config"),
+  doorNames = require("./doorNames").doorNames;
 
 module.exports = class Curation {
   constructor(user, webhookEvent) {
@@ -70,16 +71,21 @@ module.exports = class Curation {
         break;
 
       case "CURATION":
-        response = Response.genQuickReply(i18n.__("curation.prompt"), [
-          {
-            title: i18n.__("curation.me"),
-            payload: "CURATION_FOR_ME"
-          },
-          {
-            title: i18n.__("curation.someone"),
-            payload: "CURATION_SOMEONE_ELSE"
-          }
-        ]);
+        response = Response.genQuickReply(
+          i18n.__("curation.prompt", {
+            userFirstName: doorNames.strangerName
+          }),
+          [
+            {
+              title: i18n.__("curation.me"),
+              payload: "CURATION_FOR_ME"
+            },
+            {
+              title: i18n.__("curation.someone"),
+              payload: "CURATION_SOMEONE_ELSE"
+            }
+          ]
+        );
         // Add person to trusted friends list
         break;
 
