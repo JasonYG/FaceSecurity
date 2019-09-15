@@ -20,9 +20,8 @@ const express = require("express"),
   User = require("./services/user"),
   config = require("./services/config"),
   i18n = require("./i18n.config"),
-  app = express(),
-  strangerName = require("./services/doorNames").strangerName,
-  updateName = require("./services/doorNames").updateNameu;
+  app = express();
+
 var users = {};
 
 // Parse application/x-www-form-urlencoded
@@ -138,12 +137,12 @@ app.post("/webhook", (req, res) => {
 });
 
 // Receive name from the door mechanism
-
+let strangerName = "stranger";
 app.post("/doorbell", (req, res) => {
   const { name } = req.body;
-  console.log(name);
-  updateName(name);
+  strangerName = name;
 });
+exports.strangerName = strangerName;
 
 // Sends whether the door is open or not
 app.get("/open", (req, res) => {

@@ -1,8 +1,9 @@
-let strangerName = "stranger";
-
-const updateName = name => {
-  strangerName = name;
+const doorNames = {
+  strangerName: "stranger",
+  updateName: name => {
+    strangerName = name;
+  }
 };
+console.log(`stranger name is ${strangerName}`);
 
-module.strangerName = strangerName;
-module.updateName = updateName;
+exports.doorNames = doorNames;

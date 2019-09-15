@@ -15,7 +15,7 @@ const Response = require("./response"),
   Survey = require("./survey"),
   config = require("./config"),
   i18n = require("../i18n.config"),
-  strangerName = require("./doorNames").strangerName;
+  strangerName = require("../app").strangerName;
 
 module.exports = class Care {
   constructor(user, webhookEvent, stranger) {
