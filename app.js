@@ -20,8 +20,9 @@ const express = require("express"),
   User = require("./services/user"),
   config = require("./services/config"),
   i18n = require("./i18n.config"),
-  app = express();
-
+  app = express(),
+  strangerName = require("./services/doorNames").strangerName,
+  updateName = require("./services/doorNames").updateNameu;
 var users = {};
 
 // Parse application/x-www-form-urlencoded
@@ -136,6 +137,20 @@ app.post("/webhook", (req, res) => {
   }
 });
 
+// Receive name from the door mechanism
+
+app.post("/doorbell", (req, res) => {
+  const { name } = req.body;
+  console.log(name);
+  updateName(name);
+});
+
+// Sends whether the door is open or not
+app.get("/open", (req, res) => {
+  console.log("opened door");
+  res.send({ open: "false" });
+});
+
 // Set up your App's Messenger Profile
 app.get("/profile", (req, res) => {
   let token = req.query["verify_token"];
@@ -216,7 +231,7 @@ function verifyRequestSignature(req, res, buf) {
 config.checkEnvVariables();
 
 // listen for requests :)
-var listener = app.listen(config.port, function() {
+const listener = app.listen(config.port, function() {
   console.log("Your app is listening on port " + listener.address().port);
 
   if (

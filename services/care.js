@@ -14,10 +14,11 @@
 const Response = require("./response"),
   Survey = require("./survey"),
   config = require("./config"),
-  i18n = require("../i18n.config");
+  i18n = require("../i18n.config"),
+  strangerName = require("./doorNames").strangerName;
 
 module.exports = class Care {
-  constructor(user, webhookEvent) {
+  constructor(user, webhookEvent, stranger) {
     this.user = user;
     this.webhookEvent = webhookEvent;
   }
@@ -27,9 +28,12 @@ module.exports = class Care {
 
     switch (payload) {
       case "CARE_HELP":
+        // Listens for entry requests at the door
+        console.log(strangerName);
         response = Response.genQuickReply(
           i18n.__("care.prompt", {
-            userFirstName: this.user.firstName
+            // Corresponds to '____ will stay out'
+            userFirstName: strangerName
           }),
           [
             /*
@@ -45,7 +49,6 @@ module.exports = class Care {
               title: i18n.__("care.other"),
               payload: "CARE_OTHER"
             }
-            
           ]
         );
         break;

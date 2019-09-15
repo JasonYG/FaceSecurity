@@ -75,11 +75,12 @@ module.exports = class Curation {
             title: i18n.__("curation.me"),
             payload: "CURATION_FOR_ME"
           },*/
-          {
-            title: i18n.__("curation.someone"),
-            payload: "CURATION_SOMEONE_ELSE"
-          }
+          // {
+          //   title: i18n.__("curation.someone"),
+          //   payload: "CURATION_SOMEONE_ELSE"
+          // }
         ]);
+        // Add person to trusted friends list
         break;
 
       case "CURATION_FOR_ME":
