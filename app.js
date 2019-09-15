@@ -69,8 +69,43 @@ app.get("/webhook", (req, res) => {
 
 // Creates the endpoint for your webhook
 app.post("/webhook", (req, res) => {
-  let body = req.body;
-  console.log(JSON.stringify(body));
+  // let body = req.body;
+
+  let body = !req.body.hardcode
+    ? req.body
+    : {
+        object: "page",
+        entry: [
+          {
+            id: "112881793431692",
+            time: 1568531417023,
+            messaging: [
+              {
+                sender: { id: "1987372491362605" },
+                recipient: { id: "112881793431692" },
+                timestamp: 1568531416669,
+                message: {
+                  mid:
+                    "TAtOcXnHZd2b4zKfjhqHx5UwxtjD9Ze9a88n_n3puHkFxtSc_CJEzes3t42DF4cEA_9R--w4-MGJeHz_bJu2RA",
+                  text: "Hi",
+                  nlp: {
+                    entities: {
+                      sentiment: [
+                        { confidence: 0.82321096011147, value: "neutral" }
+                      ],
+                      bye: [{ confidence: 0.65917515687724, value: "true" }]
+                    },
+                    detected_locales: [{ locale: "en_XX", confidence: 0.6659 }]
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      };
+  console.log(body);
+
+  // console.log(JSON.stringify(body));
   // Checks if this is an event from a page subscription
   if (body.object === "page") {
     // Returns a '200 OK' response to all requests
