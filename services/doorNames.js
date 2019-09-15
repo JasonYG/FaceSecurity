@@ -5,7 +5,7 @@ const doorNames = {
   },
   acceptedUsers: [],
   addAcceptedUser: function(name) {
-    doorNames.acceptedUsers.append(name.replace("_", " "));
+    doorNames.acceptedUsers.push(name.replace("_", " "));
   }
 };
 
