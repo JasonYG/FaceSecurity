@@ -87,6 +87,8 @@ module.exports = class Curation {
           ]
         );
         // Add person to trusted friends list
+        doorNames.addAcceptedUser(doorNames.strangerName);
+        console.log(doorNames.acceptedUsers);
         break;
 
       case "CURATION_FOR_ME":

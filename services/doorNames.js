@@ -3,7 +3,7 @@ const doorNames = {
   updateName: function(name) {
     doorNames.strangerName = name.replace("_", " ");
   },
-  acceptedUsers: ["Jason Guo"],
+  acceptedUsers: [],
   addAcceptedUser: function(name) {
     doorNames.acceptedUsers.append(name.replace("_", " "));
   }
