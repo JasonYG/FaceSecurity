@@ -10,12 +10,24 @@ from botocore.exceptions import ClientError
 import facebook
 
 import RPi.GPIO as GPIO
+import socketio
 
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(12, GPIO.OUT)
 pwm = GPIO.PWM(12, 100)
 
+sio = socketio.Client()
+@sio.event
+def connect():
+    print('connection established')
+@sio.event
+def my_message(data):
+    print('message received with ', data)
+    sio.emit('my response', {'response': 'my response'})
+@sio.event
+def disconnect():
+    print('disconnected from server')
 
 camera = PiCamera()
 trustedPeople = ["Brian_Machado"]
@@ -39,6 +51,10 @@ def search_faces_by_image(bytes, collection_id, threshold=80):
 	)
 	return response['FaceMatches']
 
+# Connecting to server
+sio.connect('http://hack-the-north-2019.herokuapp.com')
+
+# TODO: Loop here
 # Taking pictures
 print("capturing...")
 camera.capture('/home/pi/Desktop/image.jpg')
@@ -65,17 +81,15 @@ except ClientError as e:
         print "no one at door"
 
 source_bytes.close()
-
+time.sleep(1)
 
 if(searchResult == 1 and imageId in trustedPeople):
     print "Let them in"
+    sio.emit('doorbell', {'name': imageId})
     #pwm.start(50)
-    time.sleep(1)
 elif(searchResult == 1):
     print "Untrusted friend"
 elif(searchResult == 0):
     print "unknown person"
 
 sleep(1)
-
-
