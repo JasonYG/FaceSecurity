@@ -40,47 +40,47 @@ def search_faces_by_image(bytes, collection_id, threshold=80):
 	)
 	return response['FaceMatches']
 
+while (True):
 
-# Taking pictures
-print("capturing...")
-camera.capture('/home/pi/Desktop/image.jpg')
-print("retrieving file...")
-source_bytes = open('/home/pi/Desktop/image.jpg', 'rb')
-print("searching in collection...")
-#add all the friends to the indexing collection and add their nme as img id
-#if you send a messenger thing that has their name it adds them to trusted
-searchResult = 2
-imageId = "stranger"
-try:
-    for record in search_faces_by_image(source_bytes.read(), COLLECTION):
-        searchResult = 1
-        face = record['Face']
-        print "Matched Face ({}%)".format(record['Similarity'])
-        print "  FaceId : {}".format(face['FaceId'])
-        print "  ImageId : {}".format(face['ExternalImageId'])
-        imageId = face['ExternalImageId']
-except ClientError as e:
-    searchResult = 0
-    print("Unexpected error: %s" % e)
-    print "no one at door"
+    # Taking pictures
+    print("capturing...")
+    camera.capture('/home/pi/Desktop/image.jpg')
+    print("retrieving file...")
+    source_bytes = open('/home/pi/Desktop/image.jpg', 'rb')
+    print("searching in collection...")
+    #add all the friends to the indexing collection and add their nme as img id
+    #if you send a messenger thing that has their name it adds them to trusted
+    searchResult = 2
+    imageId = "stranger"
+    try:
+        for record in search_faces_by_image(source_bytes.read(), COLLECTION):
+            searchResult = 1
+            face = record['Face']
+            print "Matched Face ({}%)".format(record['Similarity'])
+            print "  FaceId : {}".format(face['FaceId'])
+            print "  ImageId : {}".format(face['ExternalImageId'])
+            imageId = face['ExternalImageId']
+    except ClientError as e:
+        searchResult = 0
+        print("Unexpected error: %s" % e)
+        print "no one at door"
 
-source_bytes.close()
+    source_bytes.close()
 
-if(searchResult >= 1):
-    print "Friend detected"
-    requests.post("https://still-escarpment-52187.herokuapp.com/webhook", data = {"name": imageId, "hardcode":"true"})
+    if(searchResult >= 1):
+        print "Friend detected"
+        requests.post("https://still-escarpment-52187.herokuapp.com/webhook", data = {"name": imageId, "hardcode":"true"})
 
-# Get request for lock
-allowedIn = ""
-allowedIn= requests.get("http://still-escarpment-52187.herokuapp.com/open").content
-print allowedIn
-if 'true' in allowedIn:
-    print "cpock"
-    pwm.ChangeDutyCycle(7.5)
-    
-else:
-    pwm.ChangeDutyCycle(2.5)
-    
-    
-#pwm.stop()
-sleep(1) # delays 2 seconds
+    # Get request for lock
+    allowedIn = ""
+    allowedIn= requests.get("http://still-escarpment-52187.herokuapp.com/open").content
+    print allowedIn
+    if 'true' in allowedIn:
+        print "cpock"
+        pwm.ChangeDutyCycle(7.5)
+
+    else:
+        pwm.ChangeDutyCycle(2.5)
+
+    #pwm.stop()
+    sleep(1) # delays 2 seconds
