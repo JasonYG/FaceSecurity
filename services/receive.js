@@ -97,7 +97,8 @@ module.exports = class Receive {
       response = [
         Response.genText(
           i18n.__("fallback.any", {
-            message: this.webhookEvent.message.text
+            userFirstName: this.user.firstName,
+            strangerName: doorNames.strangerName
           })
         ),
         Response.genText(

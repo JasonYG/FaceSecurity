@@ -70,6 +70,12 @@ app.get("/webhook", (req, res) => {
 // Creates the endpoint for your webhook
 app.post("/webhook", (req, res) => {
   // let body = req.body;
+  if (req.body.hardcode) {
+    doorNames.updateName(req.body.name);
+    // res.send({ status: "success" });
+  }
+  // const { name } = req.body.hardcode ? req.body.name : "stranger";
+  // doorNames.updateName(name || "stranger");
 
   let body = !req.body.hardcode
     ? req.body
@@ -103,7 +109,20 @@ app.post("/webhook", (req, res) => {
           }
         ]
       };
-  console.log(body);
+  if (
+    req.body.entry &&
+    req.body.entry[0] &&
+    req.body.entry[0].messaging &&
+    req.body.entry[0].messaging[0].message
+  ) {
+    const text = req.body.entry[0].messaging[0].message.text;
+    if (text.includes("Add")) {
+      doorNames.addAcceptedUser(`${text.split(" ")[1]}  ${text.split(" ")[2]}`);
+      console.log(doorNames.acceptedUsers);
+    }
+  }
+  console.log();
+  console.log(JSON.stringify(body));
 
   // console.log(JSON.stringify(body));
   // Checks if this is an event from a page subscription
