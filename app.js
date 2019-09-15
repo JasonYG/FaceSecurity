@@ -70,7 +70,7 @@ app.get("/webhook", (req, res) => {
 // Creates the endpoint for your webhook
 app.post("/webhook", (req, res) => {
   let body = req.body;
-
+  console.log(JSON.stringify(body));
   // Checks if this is an event from a page subscription
   if (body.object === "page") {
     // Returns a '200 OK' response to all requests
@@ -141,6 +141,7 @@ app.post("/webhook", (req, res) => {
 let strangerName = "stranger";
 app.post("/doorbell", (req, res) => {
   const { name } = req.body;
+
   doorNames.updateName(name);
   res.send({ status: "added name" });
 });
@@ -149,6 +150,10 @@ exports.strangerName = strangerName;
 // Sends whether the door is open or not
 app.get("/open", (req, res) => {
   console.log("opened door");
+  if (doorNames.acceptedUsers.includes(doorNames.strangerName))
+    setTimeout(() => {
+      doorNames.updateName("stranger");
+    }, 5000);
   const { acceptedUsers } = doorNames;
   res.send({
     open: acceptedUsers.includes(doorNames.strangerName) ? "true" : "false"
